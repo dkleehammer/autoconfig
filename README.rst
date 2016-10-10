@@ -25,15 +25,14 @@ to create this project for all of my Node.js projects.
 (From mkleehammer/autoconfig) - the `12 Factor App <http://12factor.net>`_ recommends keeping
 configuration in environment variables...
 
-The problem that I see in the Node.js community is the developer or even the runtime machine
-(QA/Production webservers) is they are using configuration on the command line or setting
-environment variables to the running user.  The first problem is Windows vs macOS/Linux style
+A common solution, that can lead to problems, is to set environment variables or command line
+options to the currently running user's environment.  The first problem is Windows vs macOS/Linux style
 of setting the environment varable "SET NODE_ENV=development (or setx) vs export
 NODE_ENV=development".  The other option is to set it directly in the run node command, but
-that is even more confusing on Windows vs macOS/Linux "SET NODE_ENV=development && node
+that is sometimes more confusing on Windows vs macOS/Linux "SET NODE_ENV=development && node
 index.js vs NODE_ENV=development node index.js".
 
-In the end, this usually this results into a config file on the computer or hard-coded (env =
+In the end, this usually ends up to using a config file on the computer or hard-coded (env =
 process.env.NODE_ENV ? process.env.NODE_ENV : 'development') that is checked-in with some sort
 of .dev .qa .prod in the filename and could easily be error prone. The computer "usually" never
 changes environments mid-development cycle so it makes sense to have a configruation that is
