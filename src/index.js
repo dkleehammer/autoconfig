@@ -32,8 +32,6 @@ function _copy_env(fqn, env) {
   // read the config file
   let config = require(fqn);
 
-  console.log(fqn, env, config);
-
   if (config['env'] !== undefined) {
     envs.unshift('env');
   }
