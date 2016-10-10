@@ -1,6 +1,9 @@
 autoconfig
 ==========
 
+  .. image:: https://travis-ci.org/dkleehammer/autoconfig.svg?branch=master
+    :target: https://travis-ci.org/dkleehammer/autoconfig
+
 Overview
 --------
 
