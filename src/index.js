@@ -47,10 +47,7 @@ function _copy_env(fqn, env) {
 }
 
 function _locate_config(filename, searchfrom) {
-  console.log('filename = ' + filename);
-  console.log('searchfrom = ' + searchfrom);
-
-  if (filename.indexOf(path.sep) != -1 && searchfrom.indexOf(path.sep) != -1) {
+  if ((filename !== null && filename.indexOf(path.sep) != -1) && (searchfrom !== null && searchfrom.indexOf(path.sep) != -1)) {
     throw `Cannot provide a path in ${filename} and a ${searchfrom} value.`;
   }
 
