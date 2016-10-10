@@ -73,8 +73,8 @@ If an "env" section exists, its items are always copied, but additional sections
 also by passing them via the ``env`` keyword.  The value can be a section name or a list of
 section names - parameters are environment name (env), filename, filepath or null to search upward::
 
-  autoconfig.init(env='other');             # copy from env and other
-  autoconfig.init(env=['other', 'another]); # copy from env, other, and another
+  autoconfig.init('other');             # copy from env and other
+  autoconfig.init(['other', 'another]); # copy from env, other, and another
 
 Even though env is always copied to process.env, other environments (if passed in) override
 env.  This means that in the "Simple Example" above, other's "DATABASE_URL" will be used when
