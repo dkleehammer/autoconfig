@@ -4,7 +4,8 @@
   "description": "Simple environment configuration from a config file for Node.js",
   "main": "./src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "compile": "babel --presets es2015 -d lib/ src/",
+    "prepublish": "npm run compile"
   },
   "repository": {
     "type": "git",
@@ -21,5 +22,10 @@
   "bugs": {
     "url": "https://github.com/dkleehammer/autoconfig/issues"
   },
-  "homepage": "https://github.com/dkleehammer/autoconfig#readme"
+  "homepage": "https://github.com/dkleehammer/autoconfig#readme",
+  "devDependencies": {
+    "babel-cli": "^6.16.0",
+    "babel-preset-es2015": "^6.16.0",
+    "mocha": "^3.1.1"
+  }
 }

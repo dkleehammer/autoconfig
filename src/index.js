@@ -1,39 +1,46 @@
 "use strict";
 
-var path = require('path'), fs = require('fs');
+let path = require('path'), fs = require('fs');
 
-function init(filename, searchfrom, env) {
-  filename = filename ? filename : '.config.json',
-  searchfrom = searchfrom ? searchfrom : null,
-  env = env ? env : null;
-
+function init(env=null, filename='.config.json', searchfrom=null) {
   try {
-    var fqn = _locate_config(filename, searchfrom);
+    let fqn = _locate_config(filename, searchfrom);
 
     // parse config file (read directly from env if not null)
     _copy_env(fqn, env);
   } catch (e) {
-    console.error(e);
+    throw e;
   }
 }
 
 function _copy_env(fqn, env) {
-  // env is always added, but overriden by any specific env(s) passed in
-  var envs = ['env'];
+  // TODO:: revist to es2015-ify
 
-  for (var e in env) {
-    if (!envs[env[e]]) {
-      envs.push(env[e]);
-    }
+  // env is always added, but overriden by any specific env(s) passed in
+  let envs = [];
+
+  if (env && typeof(env) != 'string') {
+    env.forEach(e => {
+      if (!envs[e]) {
+        envs.push(e);
+      }
+    });
+  } else if (typeof(env) == 'string') {
+    envs.push(env);
   }
 
   // read the config file
-  var config = require(fqn);
+  let config = require(fqn);
 
-  for (var en in envs) {
-    var section = config[envs[en]];
+  if (config['env'] !== undefined) {
+    envs.unshift('env');
+  }
 
-    for (var conf in section) {
+  // iterate the envrionments and add them to process.env
+  for (let en in envs) {
+    let section = config[envs[en]];
+
+    for (let conf in section) {
       process.env[conf] = section[conf];
     }
   }
@@ -41,42 +48,41 @@ function _copy_env(fqn, env) {
 
 function _locate_config(filename, searchfrom) {
   if (filename.indexOf(path.sep) != -1 && searchfrom.indexOf(path.sep) != -1) {
-    throw 'Cannot provide a path in `filename` and a `searchfrom` value.';
+    throw `Cannot provide a path in ${filename} and a ${searchfrom} value.`;
   }
 
   if (path.isAbsolute(filename)) {
     if (!fs.existsSync(filename)) {
-      throw 'Did not find configuration file.  filename=' + filename;
+      throw `Did not find configuration file.  filename=${filename}`;
     }
-
     return filename;
   }
 
-  var p = path.resolve(searchfrom || process.cwd());
+  let p = path.resolve(searchfrom || process.cwd());
 
   while (1) {
-    var stats = fs.statSync(p);
+    let stats = fs.statSync(p);
 
     if (stats.isDirectory(p)) {
-      var fqn = path.join(p, filename);
+      let fqn = path.join(p, filename);
 
       try {
-        var fqn_stats = fs.statSync(fqn);
+        let fqn_stats = fs.statSync(fqn);
+
         if (fqn_stats.isFile(fqn) && !fqn_stats.isDirectory(fqn)) {
           return fqn;
         }
       } catch (e) {}
     }
 
-    var parent = path.dirname(p);
+    let parent = path.dirname(p);
     if (parent == p) {
-      throw 'Did not find configuration file.  filename=' + filename + ' searchfrom=' + searchfrom;
+      throw `Did not find configuration file.  filename=${filename} searchfrom=${searchfrom}`;
     }
     p = parent;
   }
 }
 
 module.exports = {
-  init: init,
-  _locate_config: _locate_config
+  init: init
 };
