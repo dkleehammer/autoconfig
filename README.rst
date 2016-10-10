@@ -84,7 +84,7 @@ Locating The Config File
 
 The default behavior is to look for a file named ".config.json", starting in the `current working
 directory <https://nodejs.org/api/process.html#process_process_cwd>`_ and searching upwards.  If
-a file is not found, an exception is raised.
+a file is not found, an exception is thrown.
 
 The ``init`` function accepts two keywords to customize this:
 
