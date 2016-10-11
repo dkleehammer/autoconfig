@@ -10,8 +10,9 @@ Overview
 An npm module to simplify configuration in a Node.js environment using a configuration file.
 Much of this library was based on `mkleehammer/autoconfig
 <https://github.com/mkleehammer/autoconfig>`_ a Python configuration module using a config
-file.  The biggest difference between the Python and Node.js versions is the order of the
-parameters.  Node.js does not support default paramters without the use of harmony flags::
+file.  The biggest difference between the Python and Node.js versions is that Node.js version
+excepts an object instead of parameters.  Node.js does not support default paramters without
+the use of harmony flags::
 
   var autoconfig = require('autoconfig');
   autoconfig.init();
@@ -44,7 +45,7 @@ specific, see below.
 Simple Example
 --------------
 
-If no parameters are passed, the library searches for a file named ".config.json", starting
+If an object is not passed, the library searches for a file named ".config.json", starting
 from the current directory (process.cwd()) and searching upwards.
 
 Using well-known JSON format, this makes it easy to get started instantly
@@ -71,10 +72,11 @@ Environment Variables
 
 If an "env" section exists, its items are always copied, but additional sections can be copied
 also by passing them via the ``env`` keyword.  The value can be a section name or a list of
-section names - parameters are environment name (env), filename, filepath or null to search upward::
+section names - the object can contain env (environment name), filename, searchfrom (filepath
+or null to search upward)::
 
-  autoconfig.init('other');             # copy from env and other
-  autoconfig.init(['other', 'another]); # copy from env, other, and another
+  autoconfig.init({env: 'other'});             # copy from env and other
+  autoconfig.init({env: ['other', 'another]}); # copy from env, other, and another
 
 Even though env is always copied to process.env, other environments (if passed in) override
 env.  This means that in the "Simple Example" above, other's "DATABASE_URL" will be used when
@@ -106,4 +108,4 @@ searchfrom
 
     autoconfig.init(env='env', __dirname);
 
-  This parameter is ignored if ``filename`` is an absolute path since no search is performed.
+  This object value is ignored if ``filename`` is an absolute path since no search is performed.
