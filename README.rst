@@ -9,7 +9,7 @@ Overview
 
 An npm module to simplify configuration in a Node.js environment using a configuration file.
 Much of this library was based on `mkleehammer/autoconfig
-<https://github.com/mkleehammer/autoconfig>` a Python configuration module using a config
+<https://github.com/mkleehammer/autoconfig>`_ a Python configuration module using a config
 file.  The biggest difference between the Python and Node.js versions is the order of the
 parameters.  Node.js does not support default paramters without the use of harmony flags::
 
@@ -62,7 +62,7 @@ Using well-known JSON format, this makes it easy to get started instantly
   }
 
 The two entries NODE_ENV and DATABASE_URL are added to `process.env
-<https://nodejs.org/api/process.html#process_process_env>` and are accessible anywhere in any
+<https://nodejs.org/api/process.html#process_process_env>`_ and are accessible anywhere in any
 Node.js file by simply by using process.env.NODE_ENV OR process.env.DATABASE_URL.
 
 

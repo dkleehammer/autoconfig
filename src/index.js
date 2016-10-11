@@ -2,12 +2,26 @@
 
 let path = require('path'), fs = require('fs');
 
-function init(env=null, filename='.config.json', searchfrom=null) {
+function init(config) {
+  let t = {
+    env: null,
+    filename: '.config.json',
+    searchfrom: null
+  };
+
+  config = config ? config : {};
+
+  for (let i in t) {
+    if (!config[i]) {
+      config[i] = t[i];
+    }
+  }
+
   try {
-    let fqn = _locate_config(filename, searchfrom);
+    let fqn = _locate_config(config.filename, config.searchfrom);
 
     // parse config file (read directly from env if not null)
-    _copy_env(fqn, env);
+    _copy_env(fqn, config.env);
   } catch (e) {
     throw e;
   }
