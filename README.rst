@@ -1,8 +1,22 @@
 autoconfig
 ==========
 
+
   .. image:: https://travis-ci.org/dkleehammer/autoconfig.svg?branch=master
     :target: https://travis-ci.org/dkleehammer/autoconfig
+
+  .. image:: https://img.shields.io/npm/dt/autoconfig.svg
+    :target: https://www.npmjs.com/package/autoconfig
+    :alt: Downloads
+
+  .. image:: https://img.shields.io/npm/v/autoconfig.svg
+    :target: https://www.npmjs.com/package/autoconfig
+    :alt: Version
+
+  .. image:: https://img.shields.io/npm/l/autoconfig.svg
+    :target: https://www.npmjs.com/package/autoconfig
+    :alt: Licence
+
 
 Overview
 --------
