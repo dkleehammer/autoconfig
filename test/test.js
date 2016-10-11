@@ -1,5 +1,5 @@
 
-var assert = require('assert'), autoconfig = require('../lib/index');
+var assert = require('assert'), autoconfig = require('../lib/autoconfig');
 
 describe('env', function() {
   describe('# should load env', function() {
