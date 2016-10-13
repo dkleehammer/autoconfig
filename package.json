@@ -1,6 +1,6 @@
 {
   "name": "autoconfig",
-  "version": "1.0.0",
+  "version": "1.0.0-rc.1",
   "description": "Simple environment configuration from a config file for Node.js",
   "main": "./lib/autoconfig.js",
   "scripts": {
